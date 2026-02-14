@@ -189,6 +189,18 @@ function burst(){
     for(let i=0;i<20;i++) heart();
 }
 
+    const audio = document.getElementById('loveAudio');
+
+function startMusicOnce() {
+    audio.play().catch(() => console.log("Autoplay blocked"));
+    window.removeEventListener('click', startMusicOnce);
+    window.removeEventListener('touchstart', startMusicOnce);
+}
+
+window.addEventListener('click', startMusicOnce);
+window.addEventListener('touchstart', startMusicOnce);
+
+
 // Auto-play audio on first interaction
 const audio = document.getElementById('loveAudio');
 function startMusicOnce(){
@@ -198,8 +210,12 @@ function startMusicOnce(){
 }
 window.addEventListener('click', startMusicOnce);
 window.addEventListener('touchstart', startMusicOnce);
+
+
+    
 </script>
 
 </body>
 </html>
+
 
