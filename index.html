@@ -148,12 +148,12 @@ button:hover{
 <script>
 // Typing effect for love letter
 const letter = "Joyce, every moment with you feels like a beautiful dream. You are my happiness, my comfort, my home, and my forever. I promise to love you deeper each day, in every way, always. ❤️";
-let i=0;
-function typeText(){
-    if(i<letter.length){
+let i = 0;
+function typeText() {
+    if (i < letter.length) {
         document.getElementById("typing").innerHTML += letter.charAt(i);
         i++;
-        setTimeout(typeText,40);
+        setTimeout(typeText, 40);
     }
 }
 typeText();
@@ -167,55 +167,38 @@ const msgs = [
     "Maldita ka! ✨",
     "Always & Forever ♾️"
 ];
-function showMsg(n){
-    document.getElementById("msg").innerHTML = msgs[n];
-    burst();
-}
 
 // Floating hearts
-function heart(){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(Math.random()*3+4)+"s";
+function heart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (Math.random() * 3 + 4) + "s";
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),7000);
+    setTimeout(() => h.remove(), 7000);
 }
-setInterval(heart,300);
+setInterval(heart, 300);
 
 // Burst hearts on button click
-function burst(){
-    for(let i=0;i<20;i++) heart();
+function burst() {
+    for (let i = 0; i < 20; i++) heart();
 }
 
-    const audio = document.getElementById('loveAudio');
-
-function startMusicOnce() {
-    audio.play().catch(() => console.log("Autoplay blocked"));
-    window.removeEventListener('click', startMusicOnce);
-    window.removeEventListener('touchstart', startMusicOnce);
-}
-
-window.addEventListener('click', startMusicOnce);
-window.addEventListener('touchstart', startMusicOnce);
-
-
-// Auto-play audio on first interaction
+// Get audio element
 const audio = document.getElementById('loveAudio');
-function startMusicOnce(){
-    audio.play().catch(()=>console.log("Autoplay blocked, waiting for interaction"));
-    window.removeEventListener('click', startMusicOnce);
-    window.removeEventListener('touchstart', startMusicOnce);
+
+// Show message AND play audio on button click
+function showMsg(n) {
+    document.getElementById("msg").innerHTML = msgs[n];
+    burst();
+
+    // Play music on first button click
+    if (audio.paused) {
+        audio.play().catch(() => console.log("Autoplay blocked, waiting for interaction"));
+    }
 }
-window.addEventListener('click', startMusicOnce);
-window.addEventListener('touchstart', startMusicOnce);
-
-
-    
 </script>
 
 </body>
 </html>
-
-
