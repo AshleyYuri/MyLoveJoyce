@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day Joysa ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin:0; padding:0;}
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff4e8c,#ffb86c);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.glass{
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(12px);
+    border-radius:25px;
+    padding:35px 25px;
+    width:95%;
+    max-width:460px;
+    text-align:center;
+    box-shadow: 0 25px 50px rgba(0,0,0,.3);
+    animation: fade 1.3s ease;
+}
+
+h1{ color:#fff; margin-bottom:0; }
+h2{ color:#ffe6f0; margin-top:5px; font-weight:300; }
+
+.photo{
+    width:180px;
+    height:180px;
+    margin:15px auto;
+    border-radius:50%;
+    padding:6px;
+    background: linear-gradient(45deg,#ff2e63,#fff,#ff2e63);
+    animation: spin 6s linear infinite;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg)}
+}
+
+.typing{
+    min-height:65px;
+    color:#fff;
+    font-size:15px;
+    line-height:1.6;
+    margin:15px 0;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:10px;
+}
+
+button{
+    background: rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.4);
+    padding:12px;
+    border-radius:25px;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#ff2e63;
+    transform:scale(1.05);
+}
+
+.msg{
+    margin-top:15px;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    min-height:30px;
+}
+
+.heart{
+    position:fixed;
+    bottom:-10px;
+    font-size:20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(0);opacity:1}
+    to{transform:translateY(-110vh);opacity:0}
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* Mobile tweaks */
+@media(max-width:360px){
+    .photo{ width:140px; height:140px; }
+    button{ font-size:12px; padding:10px; }
+    .typing{ font-size:14px; }
+}
+</style>
+</head>
+<body>
+
+<audio id="loveAudio" loop>
+    <source src="love.mp3" type="audio/mpeg">
+    Your browser does not support audio
+</audio>
+
+<div class="glass">
+    <h1>Happy Valentine's Day ❤️</h1>
+    <h2>My Love!</h2>
+
+    <div class="photo">
+        <img src="joysa.jpg" alt="My Love">
+    </div>
+
+    <div id="typing" class="typing"></div>
+
+    <div class="buttons">
+        <button onclick="showMsg(0)">💖</button>
+        <button onclick="showMsg(1)">😘</button>
+        <button onclick="showMsg(2)">🌹</button>
+        <button onclick="showMsg(3)">💘</button>
+        <button onclick="showMsg(4)">✨</button>
+        <button onclick="showMsg(5)">♾️</button>
+    </div>
+
+    <div id="msg" class="msg"></div>
+</div>
+
+<script>
+// Typing effect for love letter
+const letter = "Joyce, every moment with you feels like a beautiful dream. You are my happiness, my comfort, my home, and my forever. I promise to love you deeper each day, in every way, always. ❤️";
+let i=0;
+function typeText(){
+    if(i<letter.length){
+        document.getElementById("typing").innerHTML += letter.charAt(i);
+        i++;
+        setTimeout(typeText,40);
+    }
+}
+typeText();
+
+// Sweet messages for buttons
+const msgs = [
+    "I fall for you more every day 💕",
+    "Your smile melts my heart 😘",
+    "You are my favorite person 🌹",
+    "My heart beats for you 💘",
+    "You are my miracle ✨",
+    "Always & Forever ♾️"
+];
+function showMsg(n){
+    document.getElementById("msg").innerHTML = msgs[n];
+    burst();
+}
+
+// Floating hearts
+function heart(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
+}
+setInterval(heart,300);
+
+// Burst hearts on button click
+function burst(){
+    for(let i=0;i<20;i++) heart();
+}
+
+// Auto-play audio on first interaction
+const audio = document.getElementById('loveAudio');
+function startMusicOnce(){
+    audio.play().catch(()=>console.log("Autoplay blocked, waiting for interaction"));
+    window.removeEventListener('click', startMusicOnce);
+    window.removeEventListener('touchstart', startMusicOnce);
+}
+window.addEventListener('click', startMusicOnce);
+window.addEventListener('touchstart', startMusicOnce);
+</script>
+
+</body>
+</html>
